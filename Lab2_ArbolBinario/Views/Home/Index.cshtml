@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Inventario";
+}
+
+<div class="text-center">
+    <form asp-action="UploadFile" asp-controller="Home"
+          enctype="multipart/form-data" onsubmit="AJAXSubmit(this);return false;"
+          method="post">
+        <div class="row">
+            <div class="col col-lg-1">
+                <label for="fileUpload" class="col-form-label">Archivo</label>
+            </div>
+            <div class="col col-lg-5">
+                <input id="fileUpload" type="file" name="file" accept=".csv" required />
+            </div>
+            <div class="col col-lg-5">
+                <input class="btn btn-primary" type="submit" value="Cargar" />
+                <button class="btn btn-warning btn-reset float-right">Reabastecer</button>
+                <a asp-controller="Home" asp-action="Download" target="_blank" class="btn btn-success float-right">Descargar</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+
+    <div class="col col-12 text-center pt-4 pb-4"><h3>Inventario</h3></div>
+
+    <table class="display" id="grid" style="width: 100%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Casa</th>
+                <th>Precio</th>
+                <th>Existencia</th>
+                <th data-class-name="grid-actions" class="right-align grid-actions">Acciones</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<div class="row">
+
+    <div class="col col-12 text-center pt-4 pb-4"><h3>Pedido</h3></div>
+    <form asp-action="ConfirmOrder" asp-controller="Home"
+          onsubmit="AJAXSubmitOrder(this);return false;"
+          method="post" style="width: 100%;">
+        <table class="table table-striped table-hover" id="grid-inventory" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Casa</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div class="row pt-3 text-center">
+            <input class="btn btn-primary" type="submit" value="Confirmar Pedido" />
+        </div>
+    </form>
+</div>
+
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/js/home.js"></script>
+}
